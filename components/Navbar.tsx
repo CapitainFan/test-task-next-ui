@@ -1,5 +1,6 @@
 "use client"
-import * as React from "react"
+
+import { useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,12 +8,15 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-import DollarSvg from "@/components/DollarSvg"
-
+import {DollarSvg, CurrencyComponent, UaLanguageComponent, EnglishLanguageComponent} from "@/components/NavbarComponents"
 
 
 export default function Navbar() {
 
+  const [selectedCurrency, setSelectedCurrency] = useState("USD");
+  const [selectedLanguage, setSelectedLanguage] = useState("EN");
+
+  const currencyOptions = ["USD", "UAH", "EUR"];
 
   return (
     <div className="flex justify-between items-center h-[52px] bg-gray-800">
@@ -23,26 +27,26 @@ export default function Navbar() {
 
 
         <DropdownMenu>
-            <DropdownMenuTrigger>
-                <div className="flex items-center justify-center rounded-full w-[74px] h-[36px] bg-gray-900 gap-1">
-                  <DollarSvg />
-                <h3 className="text-[13px] leading-none font-medium">USD</h3>
-                </div>
+            <DropdownMenuTrigger asChild >
+              <button className="outline-none">
+                <CurrencyComponent text={selectedCurrency}/>
+              </button>      
             </DropdownMenuTrigger>
 
-            <DropdownMenuContent className="w-[74px] bg-gray-700 border-none rounded-xl">
-            <DropdownMenuItem className="flex items-center justify-center rounded-full w-[74px] h-[36px] bg-gray-900 gap-1">
-                  <DollarSvg />
-                <h3 className="text-[13px] leading-none font-medium">USD</h3>
-            </DropdownMenuItem>
-             <DropdownMenuItem className="flex items-center justify-center rounded-full w-[74px] h-[36px] bg-gray-900 gap-1">
-                  <DollarSvg />
-                <h3 className="text-[13px] leading-none font-medium">UAH</h3>
-            </DropdownMenuItem>
-             <DropdownMenuItem className="flex items-center justify-center rounded-full w-[74px] h-[36px] bg-gray-900 gap-1">
-                  <DollarSvg />
-                <h3 className="text-[13px] leading-none font-medium">EUR</h3>
-            </DropdownMenuItem>
+            <DropdownMenuContent 
+              className="w-[74px] bg-gray-700 border-none rounded-xl space-y-0.5"
+            >
+            {currencyOptions.map(currency => (
+                        <DropdownMenuItem 
+                          key={currency} 
+                          className="p-0 bg-gray-900"
+                          onClick={() => {
+                            setSelectedCurrency(currency);
+                          }}
+                        >
+                          <CurrencyComponent text={currency} />
+                        </DropdownMenuItem>
+                      ))}
             </DropdownMenuContent>
 
         </DropdownMenu>
@@ -50,43 +54,27 @@ export default function Navbar() {
 
 
 
-        <DropdownMenu >
+        <DropdownMenu>
             <DropdownMenuTrigger className="w-[65px]">
-                    <div className="flex items-center justify-center rounded-full w-[65px] h-[36px] bg-gray-900 gap-1">
-                    <div className="
-                      w-5 h-5 
-                      rounded-full 
-                      bg-[linear-gradient(180deg,rgb(51,138,243)_50%,rgb(255,218,68)_50%)]"
-                    >
-                    </div>
-                    <h3 className="w-[17px] h-[12px]">UA</h3>
-                    </div>
+              { selectedLanguage === "EN" ? <EnglishLanguageComponent/> : <UaLanguageComponent/>}
             </DropdownMenuTrigger>
 
-            <DropdownMenuContent className="w-[65px] bg-gray-700 border-none rounded-xl">
-            <DropdownMenuItem className="flex items-center justify-center rounded-full w-[65px] h-[36px] bg-gray-900 gap-1">
-                    <div className="w-5 h-5 rounded-full overflow-hidden 
-                    bg-[url('../static/images/britainflag.png')] bg-center bg-cover"
-                    />
-                    <h3 className="w-[26px] h-[12px]">EN</h3>
+            <DropdownMenuContent 
+              className="w-[65px] bg-gray-700 border-none rounded-xl space-y-0.5"
+            >
+             <DropdownMenuItem className="bg-gray-900">
+                <button onClick={() => {
+                            setSelectedLanguage("EN");
+                          }}>
+                  <EnglishLanguageComponent/>
+                </button>
             </DropdownMenuItem>
-             <DropdownMenuItem className="flex items-center justify-center rounded-full w-[65px] h-[36px] bg-gray-900 gap-1">
-                    <div className="
-                      w-5 h-5 
-                      rounded-full 
-                      bg-[linear-gradient(180deg,rgb(51,138,243)_50%,rgb(255,218,68)_50%)]"
-                    >
-                    </div>
-                    <h3 className="w-[17px] h-[12px]">UA</h3>
-            </DropdownMenuItem>
-             <DropdownMenuItem className="flex items-center justify-center rounded-full w-[65px] h-[36px] bg-gray-900 gap-1">
-                    <div className="
-                      w-5 h-5 
-                      rounded-full 
-                      bg-[linear-gradient(180deg,rgb(51,138,243)_50%,rgb(255,218,68)_50%)]"
-                    >
-                    </div>
-                    <h3 className="w-[17px] h-[12px]">UA</h3>
+            <DropdownMenuItem className="bg-gray-900">
+               <button onClick={() => {
+                            setSelectedLanguage("UA");
+                          }}>
+                  <UaLanguageComponent/>
+                </button>
             </DropdownMenuItem>
             </DropdownMenuContent>
 
