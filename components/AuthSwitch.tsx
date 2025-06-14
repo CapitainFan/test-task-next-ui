@@ -9,10 +9,11 @@ interface AuthSwitchProps {
 
 export default function AuthSwitch({ isLogin, onToggle }: AuthSwitchProps) {
   return (
-    <div className="relative flex items-center p-1 bg-black rounded-full w-[240px] h-12">
+    <div className="relative flex items-center bg-black rounded-full w-[284px] h-[36px] mx-auto">
       <button
-        className={`relative z-10 flex-1 text-center text-sm font-medium transition-colors ${
-          isLogin ? 'text-black' : 'text-white'}`}
+        className={`relative z-10 flex-1 text-center font-medium transition-colors text-[13px] h-full flex items-center justify-center ${
+          isLogin ? 'text-black' : 'text-white'
+        }`}
         onClick={() => onToggle(true)}
         type="button"
       >
@@ -20,8 +21,9 @@ export default function AuthSwitch({ isLogin, onToggle }: AuthSwitchProps) {
       </button>
       
       <button
-        className={`relative z-10 flex-1 text-center text-sm font-medium transition-colors ${
-          !isLogin ? 'text-black' : 'text-white'}`}
+        className={`relative z-10 flex-1 text-center font-medium transition-colors text-[13px] h-full flex items-center justify-center ${
+          !isLogin ? 'text-black' : 'text-white'
+        }`}
         onClick={() => onToggle(false)}
         type="button"
       >
@@ -29,9 +31,20 @@ export default function AuthSwitch({ isLogin, onToggle }: AuthSwitchProps) {
       </button>
       
       <motion.div
-        className="absolute top-1 left-1 bg-white rounded-full w-[116px] h-10"
-        animate={{ x: isLogin ? 0 : 118, }}
-        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+        className="absolute bg-white rounded-full w-[138px] h-[28px]"
+        style={{
+          top: '4px',
+          left: '4px',
+        }}
+        animate={{
+          x: isLogin ? 0 : 138,
+        }}
+        transition={{ 
+          type: 'spring', 
+          stiffness: 280, 
+          damping: 22,
+          mass: 0.6
+        }}
       />
     </div>
   );
