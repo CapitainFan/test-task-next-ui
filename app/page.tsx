@@ -12,14 +12,30 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
-import AuthSwitch from "@/components/AuthSwitch"
-import { CancelButtonAuth, CheckboxAuth} from "@/components/AuthComponents"
+import {
+  CancelButtonAuth,
+  CheckboxAuth,
+  AuthSwitch,
+  GoogleIcon,
+  AppleIcon,
+  FaceBookIcon,
+  DiskordIcon,
+  TelegramIcon,
+} from "@/components/AuthComponents"
 import { motion, AnimatePresence } from "framer-motion"
 
 
 export default function Home() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isLoginForm, setIsLoginForm] = useState(true);
+
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+
+  const [registerEmail, setRegisterEmail] = useState('');
+  const [registerPassword, setRegisterPassword] = useState('');
+  const [registerConfirmPassword, setRegisterConfirmPassword] = useState('');
+
 
   const handleAuthToggle = (isLogin: boolean) => {
     setIsLoginForm(isLogin);
@@ -32,7 +48,8 @@ export default function Home() {
           <DialogTrigger asChild>
             <Button
               variant="outline"
-              className="w-[264px] h-[44px] flex items-center justify-center text-xs leading-[12px] font-medium text-gray-900 bg-white rounded-full shadow-sm hover:bg-gray-100"
+              className="w-[264px] h-[44px] flex items-center justify-center text-xs leading-[12px]
+              font-medium text-gray-900 bg-white rounded-full shadow-sm hover:bg-gray-100"
               onClick={() => setIsLoginForm(false)}
             >
               Registration
@@ -41,7 +58,8 @@ export default function Home() {
           
           <DialogTrigger asChild>
             <Button
-              className="w-[264px] h-[44px] flex items-center justify-center text-xs leading-[12px] font-medium text-gray-900 bg-white rounded-full shadow-sm hover:bg-gray-100"
+              className="w-[264px] h-[44px] flex items-center justify-center text-xs leading-[12px] font-medium
+              text-gray-900 bg-white rounded-full shadow-sm hover:bg-gray-100"
               onClick={() => setIsLoginForm(true)}
             >
               Login
@@ -54,19 +72,15 @@ export default function Home() {
             <DialogContent 
               forceMount
               className={`
-                bg-gray-800 border-none
-                w-[350px] 
-                ${isLoginForm ? 'h-[316px]' : 'h-[376px]'}
+                bg-[#1f242c] border-none
+                w-[360px] 
+                ${isLoginForm ? 'h-[408px]' : 'h-[486px]'}
                 overflow-hidden
-                p-0
+                p-0 rounded-xl
                 flex flex-col
               `}
+              showCloseButton={false}
             >
-              <DialogClose asChild>
-                <button>
-                  <CancelButtonAuth/>
-                </button>
-              </DialogClose>
 
               <motion.div
                 key={isDialogOpen ? "dialog-open" : "dialog-closed"}
@@ -77,14 +91,22 @@ export default function Home() {
                   duration: 0.5,
                   ease: [0.33, 1, 0.68, 1]
                 }}
-                className="flex-1 flex flex-col pt-2"
+                className="flex-1 flex flex-col pt-2 relative"
               >
-                <DialogHeader>
-                  <DialogTitle className="flex justify-center mt-4">
-                    <AuthSwitch 
-                      isLogin={isLoginForm} 
-                      onToggle={handleAuthToggle} 
-                    />
+                <DialogHeader className="mb-[25px]">
+                  <DialogTitle className="flex justify-between items-center mt-4 px-6">
+                    <div className="flex-1"></div>
+                    <div className="flex-1 flex justify-center -translate-x-4">
+                      <AuthSwitch 
+                        isLogin={isLoginForm} 
+                        onToggle={handleAuthToggle} 
+                      />
+                    </div>
+                    <div className="flex-1 flex justify-end">
+                      <button onClick={() => setIsDialogOpen(false)}>
+                        <CancelButtonAuth/>
+                      </button>
+                    </div>
                   </DialogTitle>
                 </DialogHeader>
 
@@ -92,36 +114,85 @@ export default function Home() {
                   {isLoginForm ? (
                     <>
                       <div className="grid gap-4 py-2">
-                        <Input name="email" placeholder="Email" className="bg-gray-700 border-none text-white"/>
-                        <Input name="password" placeholder="Password" type="password" className="bg-gray-700 border-none text-white"/>
+                        <form className="space-y-2">
+                          <Input
+                          id="loginEmail" name="loginEmail"
+                          value={loginEmail}
+                          onChange={e => setLoginEmail(e.target.value)}
+                          placeholder="Email" type="text"
+                          className="bg-[#101418] border-[#3a3e45] text-white h-[44px] rounded-xl"
+                          />
+                          <Input
+                          id="loginPassword" name="loginPassword"
+                          value={loginPassword} 
+                          onChange={e => setLoginPassword(e.target.value)}
+                          placeholder="Password" type="password" 
+                          className="bg-[#101418] border-[#3a3e45] text-white h-[44px] rounded-xl"
+                          />
+                        </form>
                       </div>
                       
                       <div className="mt-auto">
                         <Button
-                          className="w-full mt-4 h-[44px] flex items-center justify-center text-xs leading-[12px] font-medium text-gray-900 bg-white rounded-full shadow-sm hover:bg-gray-100"
+                          className="w-full mt-4 h-[44px] flex items-center justify-center text-xs leading-[12px]
+                          font-medium text-gray-900 bg-white rounded-full shadow-sm hover:bg-gray-100"
                           type="button"
                         >
                           Login
                         </Button>
                         
-                        <label className="flex items-center justify-center text-xs mt-4 text-white">
+                        <label className="flex items-center justify-center text-xs mt-7 mb-1 text-white">
                           Use social networks
                         </label>
 
-                         <label className="flex items-center justify-center text-xs mt-4 text-gray-400 underline">
-                          Forgot password?
-                        </label>
+                        <div className="flex justify-center mt-3">
+                          <div className="flex gap-3 w-[322px] justify-center">
+                            <GoogleIcon/>
+                            <AppleIcon/>
+                            <FaceBookIcon/>
+                            <DiskordIcon/>
+                            <TelegramIcon/>
+                          </div>
+                        </div>
+
+                        <Link 
+                          className="flex items-center justify-center text-xs mt-4 text-gray-400 underline"
+                          href="#"
+                          >
+                          Forgot password ?
+                        </Link>
+                        
                       </div>
                     </>
                   ) : (
                     <>
                       <div className="grid gap-4 py-2">
-                        <Input name="email" placeholder="Email or Mobile" className="bg-gray-700 border-none text-white"/>
-                        <Input name="password" placeholder="Password" type="password" className="bg-gray-700 border-none text-white"/>
-                        <Input name="confirmPassword" placeholder="Confirm Password" type="password" className="bg-gray-700 border-none text-white"/>
+                        <form className="space-y-2">
+                          <Input
+                          id="registerEmail" name="registerEmail"
+                          value={registerEmail}
+                          onChange={e => setRegisterEmail(e.target.value)}
+                          placeholder="Email or Mobile" type="text"
+                          className="bg-[#101418] border-[#3a3e45] text-white h-[44px] rounded-xl"
+                          />
+                          <Input
+                          id="registerPassword" name="registerPassword"
+                          value={registerPassword}
+                          onChange={e => setRegisterPassword(e.target.value)}
+                          placeholder="Password" type="password"
+                          className="bg-[#101418] border-[#3a3e45] text-white h-[44px] rounded-xl"
+                          />
+                          <Input
+                          id="registerConfirmPassword" name="registerConfirmPassword"
+                          value={registerConfirmPassword}
+                          onChange={e => setRegisterConfirmPassword(e.target.value)}
+                          placeholder="Confirm Password" type="password"
+                          className="bg-[#101418] border-[#3a3e45] text-white h-[44px] rounded-xl"
+                          />
+                        </form>
                       </div>
                       
-                      <div className="mt-2 mb-4">
+                      <div className="mt-6 mb-4">
                         <div className="flex items-center space-x-2">
                           <CheckboxAuth
                              onCheck={() => console.log("Галочка установлена!")}
@@ -134,15 +205,26 @@ export default function Home() {
                       
                       <div className="mt-auto">
                         <Button
-                          className="w-full mt-4 h-[44px] flex items-center justify-center text-xs leading-[12px] font-medium text-gray-900 bg-white rounded-full shadow-sm hover:bg-gray-100"
+                          className="w-full mt-4 h-[44px] flex items-center justify-center text-xs leading-[12px]
+                          font-medium text-gray-900 bg-white rounded-full shadow-sm hover:bg-gray-100"
                           type="button"
                         >
                           Registration
                         </Button>
                         
-                        <label className="flex items-center justify-center text-xs mt-4 text-white">
+                        <label className="flex items-center justify-center text-xs mt-7 mb-1 text-white">
                           Use social networks
                         </label>
+
+                        <div className="flex justify-center mt-3">
+                          <div className="flex gap-3 w-[322px] justify-center">
+                            <GoogleIcon/>
+                            <AppleIcon/>
+                            <FaceBookIcon/>
+                            <DiskordIcon/>
+                            <TelegramIcon/>
+                          </div>
+                        </div>
 
                       </div>
                     </>
@@ -157,7 +239,8 @@ export default function Home() {
       <div className="pt-6">
         <Link
           href="/orders"
-          className="w-[296px] h-[36px] flex items-center justify-center text-xs leading-[12px] font-medium text-gray-900 bg-white rounded-full shadow-sm hover:bg-gray-100 border border-gray-300"
+          className="w-[296px] h-[36px] flex items-center justify-center text-xs leading-[12px] font-medium
+          text-gray-900 bg-white rounded-full shadow-sm hover:bg-gray-100 border border-gray-300"
         >
           <h3 className="font-bold">Orders</h3>
         </Link>
