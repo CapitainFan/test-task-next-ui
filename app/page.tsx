@@ -135,7 +135,7 @@ export default function Home() {
                       <div className="mt-auto">
                         <Button
                           className="w-full mt-4 h-[44px] flex items-center justify-center text-xs leading-[12px]
-                          font-medium text-gray-900 bg-white rounded-full shadow-sm hover:bg-gray-100"
+                          font-normal text-gray-900 bg-white rounded-full shadow-sm hover:bg-gray-100"
                           type="button"
                         >
                           Login
@@ -206,7 +206,7 @@ export default function Home() {
                       <div className="mt-auto">
                         <Button
                           className="w-full mt-4 h-[44px] flex items-center justify-center text-xs leading-[12px]
-                          font-medium text-gray-900 bg-white rounded-full shadow-sm hover:bg-gray-100"
+                          font-normal text-gray-900 bg-white rounded-full shadow-sm hover:bg-gray-100"
                           type="button"
                         >
                           Registration
