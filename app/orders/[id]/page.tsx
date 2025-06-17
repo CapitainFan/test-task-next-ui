@@ -4,16 +4,18 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { RedIndicator, GreenIndicator } from "@/components/OrdersComponents";
 import Link from "next/link";
 
-import orders from "@/utils/db";
+import { orders } from "@/utils/db";
 import { CancelButtonAuth } from "@/components/AuthComponents"
 import { Button } from "@/components/ui/button"
+import React from 'react';
 
 
 export default function OrderDetailPage({ params }: { 
-  params: { id: string } 
+  params: Promise<{ id: string }> 
 }) {
 
-  const transactionId = `#${params.id}`;
+  const resolvedParams = React.use(params);
+  const transactionId = `#${resolvedParams.id}`;
 
   const order = orders.find(order => 
     order.transactionId === transactionId
@@ -31,7 +33,7 @@ export default function OrderDetailPage({ params }: {
         </div>
 
 
-        <Card key={order.transactionId} className="rounded-xl w-[326px] h-[120px] bg-[#232831] border-none mt-1">
+        <Card className="rounded-xl w-[326px] h-[120px] bg-[#232831] border-none mt-1">
           <CardContent className="px-2 pt-1 pb-2 relative">
 
             <div className="ml-2 mr-2 absolute top-1/2 left-0 right-0 h-[1px] bg-gray-600 -translate-y-1/2"></div>
@@ -89,7 +91,7 @@ export default function OrderDetailPage({ params }: {
         </div>
 
 
-        <Card key={order.transactionId} className="rounded-xl w-[326px] h-[120px] bg-[#232831] border-none">
+        <Card className="rounded-xl w-[326px] h-[120px] bg-[#232831] border-none">
           <CardContent className="flex flex-col items-center">
             
             <div className="flex flex-row space-x-2">

@@ -12,7 +12,7 @@ import {
 import Link from "next/link";
 import { RedIndicator, GreenIndicator } from "@/components/OrdersComponents";
 
-import orders from "@/utils/db";
+import { orders } from "@/utils/db";
 
 
 export default function Orders() {
@@ -37,7 +37,7 @@ export default function Orders() {
             href={`/orders/${order.transactionId.replace("#", "")}`}
             className="block no-underline"
           >
-          <Card key={order.transactionId} className="rounded-xl w-[326px] h-[120px] bg-[#232831] border-none">
+          <Card className="rounded-xl w-[326px] h-[120px] bg-[#232831] border-none">
             <CardContent className="px-2 pt-1 pb-2 relative">
 
               <div className="ml-2 mr-2 absolute top-1/2 left-0 right-0 h-[1px] bg-gray-600 -translate-y-1/2"></div>

@@ -116,30 +116,32 @@ export default function Home() {
                       <div className="grid gap-4 py-2">
                         <form className="space-y-2">
                           <Input
-                          id="loginEmail" name="loginEmail"
-                          value={loginEmail}
-                          onChange={e => setLoginEmail(e.target.value)}
-                          placeholder="Email" type="text"
-                          className="bg-[#101418] border-[#3a3e45] text-white h-[44px] rounded-xl"
+                            id="loginEmail" name="loginEmail"
+                            value={loginEmail}
+                            onChange={e => setLoginEmail(e.target.value)}
+                            placeholder="Email" type="text"
+                            className="bg-[#101418] border-[#3a3e45] text-white h-[44px] rounded-xl"
                           />
                           <Input
-                          id="loginPassword" name="loginPassword"
-                          value={loginPassword} 
-                          onChange={e => setLoginPassword(e.target.value)}
-                          placeholder="Password" type="password" 
-                          className="bg-[#101418] border-[#3a3e45] text-white h-[44px] rounded-xl"
+                            id="loginPassword" name="loginPassword"
+                            value={loginPassword} 
+                            onChange={e => setLoginPassword(e.target.value)}
+                            placeholder="Password" type="password" 
+                            className="bg-[#101418] border-[#3a3e45] text-white h-[44px] rounded-xl"
                           />
                         </form>
                       </div>
                       
                       <div className="mt-auto">
-                        <Button
-                          className="w-full mt-4 h-[44px] flex items-center justify-center text-xs leading-[12px]
-                          font-normal text-gray-900 bg-white rounded-full shadow-sm hover:bg-gray-100"
-                          type="button"
-                        >
-                          Login
-                        </Button>
+                        <Link href="/orders">
+                          <Button
+                            className="w-full mt-4 h-[44px] flex items-center justify-center text-xs leading-[12px]
+                            font-normal text-gray-900 bg-white rounded-full shadow-sm hover:bg-gray-100"
+                            type="button"
+                          >
+                            Login
+                          </Button>
+                        </Link>
                         
                         <label className="flex items-center justify-center text-xs mt-7 mb-1 text-white">
                           Use social networks
@@ -169,25 +171,25 @@ export default function Home() {
                       <div className="grid gap-4 py-2">
                         <form className="space-y-2">
                           <Input
-                          id="registerEmail" name="registerEmail"
-                          value={registerEmail}
-                          onChange={e => setRegisterEmail(e.target.value)}
-                          placeholder="Email or Mobile" type="text"
-                          className="bg-[#101418] border-[#3a3e45] text-white h-[44px] rounded-xl"
+                            id="registerEmail" name="registerEmail"
+                            value={registerEmail}
+                            onChange={e => setRegisterEmail(e.target.value)}
+                            placeholder="Email or Mobile" type="text"
+                            className="bg-[#101418] border-[#3a3e45] text-white h-[44px] rounded-xl"
                           />
                           <Input
-                          id="registerPassword" name="registerPassword"
-                          value={registerPassword}
-                          onChange={e => setRegisterPassword(e.target.value)}
-                          placeholder="Password" type="password"
-                          className="bg-[#101418] border-[#3a3e45] text-white h-[44px] rounded-xl"
+                            id="registerPassword" name="registerPassword"
+                            value={registerPassword}
+                            onChange={e => setRegisterPassword(e.target.value)}
+                            placeholder="Password" type="password"
+                            className="bg-[#101418] border-[#3a3e45] text-white h-[44px] rounded-xl"
                           />
                           <Input
-                          id="registerConfirmPassword" name="registerConfirmPassword"
-                          value={registerConfirmPassword}
-                          onChange={e => setRegisterConfirmPassword(e.target.value)}
-                          placeholder="Confirm Password" type="password"
-                          className="bg-[#101418] border-[#3a3e45] text-white h-[44px] rounded-xl"
+                            id="registerConfirmPassword" name="registerConfirmPassword"
+                            value={registerConfirmPassword}
+                            onChange={e => setRegisterConfirmPassword(e.target.value)}
+                            placeholder="Confirm Password" type="password"
+                            className="bg-[#101418] border-[#3a3e45] text-white h-[44px] rounded-xl"
                           />
                         </form>
                       </div>
@@ -196,7 +198,7 @@ export default function Home() {
                         <div className="flex items-center space-x-2">
                           <CheckboxAuth
                              onCheck={() => console.log("Галочка установлена!")}
-                            />
+                          />
                           <label htmlFor="terms" className="text-sm text-gray-300">
                             Use social networks
                           </label>
@@ -204,13 +206,15 @@ export default function Home() {
                       </div>
                       
                       <div className="mt-auto">
-                        <Button
-                          className="w-full mt-4 h-[44px] flex items-center justify-center text-xs leading-[12px]
-                          font-normal text-gray-900 bg-white rounded-full shadow-sm hover:bg-gray-100"
-                          type="button"
-                        >
-                          Registration
+                        <Link href="/orders">
+                          <Button
+                            className="w-full mt-4 h-[44px] flex items-center justify-center text-xs leading-[12px]
+                            font-normal text-gray-900 bg-white rounded-full shadow-sm hover:bg-gray-100"
+                            type="button"
+                          >
+                            Registration
                         </Button>
+                        </Link>
                         
                         <label className="flex items-center justify-center text-xs mt-7 mb-1 text-white">
                           Use social networks
