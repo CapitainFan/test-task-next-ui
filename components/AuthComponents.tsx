@@ -61,11 +61,7 @@ export function AuthSwitch({ isLogin, onToggle }: AuthSwitchProps) {
 }
 
 
-export const CheckboxAuth = ({
-  className,
-  onCheck,
-  ...props
-}: CheckboxAuthProps) => {
+export const CheckboxAuth = ({className, onCheck, ...props}: CheckboxAuthProps) => {
   const handleCheckedChange = (checked: CheckboxPrimitive.CheckedState) => {
     if (props.onCheckedChange) {
       props.onCheckedChange(checked);
