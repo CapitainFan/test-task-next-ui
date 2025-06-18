@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import {
@@ -24,6 +23,11 @@ import {
 } from "@/components/AuthComponents"
 import { motion, AnimatePresence } from "framer-motion"
 
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { signIn, useSession } from 'next-auth/react'
+import { toast } from "react-toastify";
+
 
 export default function Home() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -36,10 +40,97 @@ export default function Home() {
   const [registerPassword, setRegisterPassword] = useState('');
   const [registerConfirmPassword, setRegisterConfirmPassword] = useState('');
 
+  const { data: session, status: sessionStatus } = useSession();
+
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const handleAuthToggle = (isLogin: boolean) => {
     setIsLoginForm(isLogin);
   };
+
+  const handleLoginSubmit = async () => {
+    setIsLoading(true);
+
+    if (!loginEmail || !loginPassword) {
+      toast.error("Please fill all fields");
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      const res = await signIn("credientals", {
+        redirect: false,
+        email: loginEmail,
+        password: loginPassword,
+      });
+
+      if (res?.error) {
+        throw new Error(res.error);
+      }
+
+      toast.success("Successfully logged in");
+      router.push('/orders');
+    } catch (error) {
+      toast.error(error.message || "Authentication failed");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+
+
+  const handleRegisterSubmit = async () => {
+    if (!registerEmail || !registerPassword || !registerConfirmPassword) {
+            toast.error('Please fill all the input fields');
+            return;
+        } else if (registerPassword !== registerConfirmPassword) {
+            toast.error("Password do not match")
+            return;
+        }
+
+    setIsLoading(true);
+
+    try {
+      const res = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: registerEmail,
+          password: registerPassword,
+          confirmPassword: registerConfirmPassword,
+        })
+      });
+
+      if (res.status === 400) {
+        toast.error("This email is already registered");
+      } else if (res.status === 201) {
+        toast.success("Account created successfully");
+        
+        const loginRes = await signIn("credientals", {
+          redirect: false,
+          email: registerEmail,
+          password: registerPassword,
+        });
+
+        if (loginRes?.error) {
+          throw new Error(loginRes.error);
+        }
+
+        toast.success("Successfully logged in");
+        router.push('/orders');
+      }
+    } catch (error) {
+      toast.error(error.message || "An error occurred");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+
+  if (sessionStatus === 'loading') {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-[calc(100vh-52px)] overflow-hidden p-4">
@@ -133,15 +224,14 @@ export default function Home() {
                       </div>
                       
                       <div className="mt-auto">
-                        <Link href="/orders">
                           <Button
                             className="w-full mt-4 h-[44px] flex items-center justify-center text-xs leading-[12px]
                             font-normal text-gray-900 bg-white rounded-full shadow-sm hover:bg-gray-100"
                             type="button"
+                            onClick={handleLoginSubmit}
                           >
-                            Login
+                            {isLoading ? "Processing..." : "Login"}
                           </Button>
-                        </Link>
                         
                         <label className="flex items-center justify-center text-xs mt-7 mb-1 text-white">
                           Use social networks
@@ -206,15 +296,14 @@ export default function Home() {
                       </div>
                       
                       <div className="mt-auto">
-                        <Link href="/orders">
                           <Button
                             className="w-full mt-4 h-[44px] flex items-center justify-center text-xs leading-[12px]
                             font-normal text-gray-900 bg-white rounded-full shadow-sm hover:bg-gray-100"
                             type="button"
+                            onClick={handleRegisterSubmit}
                           >
-                            Registration
+                            {isLoading ? "Processing..." : "Registration"}
                         </Button>
-                        </Link>
                         
                         <label className="flex items-center justify-center text-xs mt-7 mb-1 text-white">
                           Use social networks

@@ -12,7 +12,7 @@ import {
 import Link from "next/link";
 import { RedIndicator, GreenIndicator } from "@/components/OrdersComponents";
 
-import { orders } from "@/utils/db";
+import {orders} from "@/utils/db";
 
 
 export default function Orders() {

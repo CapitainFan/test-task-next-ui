@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-export const connectDB = async () => {
+const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
     console.log('Connected to MongoDB');
@@ -11,7 +11,7 @@ export const connectDB = async () => {
 };
 
 
-const orders = [
+export const orders = [
     {
       transactionId: "#51325",
       date: "12.06.2024",
