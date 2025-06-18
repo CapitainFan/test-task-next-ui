@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { getServerSession } from "next-auth";
-import SessionProvider from "@/utils/SessionProvider";
+import SessionProvider from "@/components/SessionProvider";
 import Navbar from "@/components/Navbar";
 import ReactToast from "@/components/react-toast";
+import ReduxProvider from "@/components/ReduxProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,18 +22,24 @@ export const metadata: Metadata = {
   description: "Test Task",
 };
 
-export default async function RootLayout({ children }: any) {
-  const session = await getServerSession() 
+export default async function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  const session = await getServerSession();
+  
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <SessionProvider session={session}>
           <Navbar/>
-          {children}
+          <ReduxProvider>
+            {children}
+          </ReduxProvider>
           <ReactToast/>
         </SessionProvider>
       </body>
     </html>
   );
 }
-

@@ -11,7 +11,17 @@ const connectDB = async () => {
 };
 
 
-export const orders = [
+export interface Order {
+  transactionId: string;
+  date: string;
+  status: "success" | "failed" | "pending";
+  gameName: string;
+  gameId: string;
+  amount: string;
+}
+
+
+export const orders: Order[] = [
     {
       transactionId: "#51325",
       date: "12.06.2024",

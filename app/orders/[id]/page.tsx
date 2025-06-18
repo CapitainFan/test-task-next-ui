@@ -9,10 +9,14 @@ import { CancelButtonAuth } from "@/components/AuthComponents"
 import { Button } from "@/components/ui/button"
 import React from 'react';
 
+import { useAppSelector } from '@/app/redux/hooks';
+
 
 export default function OrderDetailPage({ params }: { 
   params: Promise<{ id: string }> 
 }) {
+
+  const { orders } = useAppSelector(state => state.orders);
 
   const resolvedParams = React.use(params);
   const transactionId = `#${resolvedParams.id}`;

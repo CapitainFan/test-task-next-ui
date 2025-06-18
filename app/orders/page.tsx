@@ -12,10 +12,13 @@ import {
 import Link from "next/link";
 import { RedIndicator, GreenIndicator } from "@/components/OrdersComponents";
 
-import {orders} from "@/utils/db";
 
+import { useAppSelector } from '@/app/redux/hooks';
 
 export default function Orders() {
+
+  const { orders } = useAppSelector(state => state.orders);
+
   return (
     <div className="w-full h-[calc(100vh-52px)] overflow-y-auto p-4">
       <div className="flex flex-col items-center w-full space-y-4">
