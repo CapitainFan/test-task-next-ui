@@ -20,4 +20,5 @@
 - **Tailwind CSS v4 + Shadcn UI**
 - **Framer Motion — * - для анимаций**
 - **Redux — * - для управления состоянием**
+- **React-Toastify - * - всплывающие уведомления**
 - **Vercel + Docker — деплой**

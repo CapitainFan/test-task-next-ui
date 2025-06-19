@@ -7,7 +7,7 @@ import Navbar from "@/components/Navbar";
 import ReactToast from "@/components/react-toast";
 import ReduxProvider from "@/components/ReduxProvider";
 
-const geistSans = Geist({
+const geistSans = Geist({ 
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
@@ -30,7 +30,7 @@ export default async function RootLayout({
   const session = await getServerSession();
   
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <SessionProvider session={session}>
           <Navbar/>

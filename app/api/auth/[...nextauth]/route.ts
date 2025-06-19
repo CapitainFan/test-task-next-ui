@@ -1,9 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from 'bcryptjs';
-import User from '@/models/User';
-import connectDB from "@/utils/db";
-import { signIn } from "next-auth/react";
+import User from '@/app/models/User';
 import mongoose from "mongoose";
 
 
@@ -50,7 +48,7 @@ export const authOptions = {
 
 
       callbacks: {
-        async signIn({ user, account }) {
+        async signIn({ account }) {
             if (account?.provider == 'credientals') {
                 return true;
             }

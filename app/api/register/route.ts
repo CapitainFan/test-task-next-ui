@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from 'bcryptjs';
-import User from "@/models/User";
+import User from "@/app/models/User";
 import connectDB from "@/utils/db";
 
 
@@ -46,7 +46,7 @@ export const POST = async (request: NextRequest): Promise<NextResponse> => {
       { message: "User created successfully" },
       { status: 201 }
     );
-  } catch (error: any) {
+  } catch (error: string) {
     console.error("Registration error:", error);
     return NextResponse.json(
       { error: "Server error: " + error.message },

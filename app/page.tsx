@@ -4,7 +4,6 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogHeader,
   DialogTitle,
@@ -40,7 +39,7 @@ export default function Home() {
   const [registerPassword, setRegisterPassword] = useState('');
   const [registerConfirmPassword, setRegisterConfirmPassword] = useState('');
 
-  const { data: session, status: sessionStatus } = useSession();
+  const {status: sessionStatus } = useSession();
 
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();

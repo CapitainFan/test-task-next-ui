@@ -15,8 +15,6 @@ export default function Navbar() {
   const [selectedCurrency, setSelectedCurrency] = useState("USD");
   const [selectedLanguage, setSelectedLanguage] = useState("EN");
 
-  const currencyOptions = ["USD", "UAH", "EUR"];
-
   return (
     <div className="flex justify-between items-center h-[52px] bg-[#0b1019]">
     
