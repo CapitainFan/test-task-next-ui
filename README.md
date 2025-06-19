@@ -15,7 +15,7 @@
 
 ## Технологии
 - **Next.js 15.3**
-- **NextAuth.js 4.24.11**
+- **NextAuth.js 4.24.11 + MongoDB**
 - **TypeScript, React 18+**
 - **Tailwind CSS v4 + Shadcn UI**
 - **Framer Motion — * - для анимаций**
