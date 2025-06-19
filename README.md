@@ -1,7 +1,7 @@
 # Test Task
 
 Этот проект является тестовым заданием
-
+https://test-task-next-ui-8anf.vercel.app/
 ---
 
 ## Описание проекта
@@ -21,4 +21,4 @@
 - **Framer Motion — * - для анимаций**
 - **Redux — * - для управления состоянием**
 - **React-Toastify - * - всплывающие уведомления**
-- **Vercel + Docker — деплой**
+- **Vercel + Docker + MongoDB Atlas Database — деплой**
